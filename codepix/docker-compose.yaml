@@ -68,7 +68,7 @@ services:
       PORT: 9021
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:7.6
     tty: true
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@user.com
