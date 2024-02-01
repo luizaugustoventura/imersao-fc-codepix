@@ -38,13 +38,14 @@ func (k *KafkaProcessor) Consume() {
 		panic(err)
 	}
 
-	topics := []string{os.Getenv("transactionTopic"), os.Getenv("kafkaTransactionConfirmationTopic")}
+	topics := []string{os.Getenv("kafkaTransactionTopic"), os.Getenv("kafkaTransactionConfirmationTopic")}
 	c.SubscribeTopics(topics, nil)
 
 	fmt.Println("kafka consumer has been started")
 	for {
 		msg, err := c.ReadMessage(-1)
 		if err == nil {
+			fmt.Println(string(msg.Value))
 			k.processMessage(msg)
 		}
 	}
@@ -79,6 +80,7 @@ func (k *KafkaProcessor) processTransaction(msg *ckafka.Message) error {
 		transaction.PixKeyTo,
 		transaction.PixKeyKindTo,
 		transaction.Description,
+		transaction.ID,
 	)
 	if err != nil {
 		fmt.Println("error registering transaction", err)

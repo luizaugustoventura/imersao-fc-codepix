@@ -1,0 +1,41 @@
+GET http://localhost:3000/bank-accounts
+
+@bank_account_id = 8ec45c59-ea5f-4815-b320-d6bd63ff45b7
+
+###
+GET http://localhost:3000/bank-accounts/{{bank_account_id}}
+
+###
+POST http://localhost:3000/bank-accounts
+Content-Type: application/json
+
+{
+  "account_number": "1111-1",
+  "owner_name": "John Doe"
+}
+
+###
+GET http://localhost:3000/bank-accounts/{{bank_account_id}}/pix-keys
+
+###
+POST http://localhost:3000/bank-accounts/{{bank_account_id}}/pix-keys
+Content-Type: application/json
+
+{
+  "kind": "email",
+  "key": "user@email.com"
+}
+
+###
+GET http://localhost:3000/bank-accounts/{{bank_account_id}}/transactions
+
+###
+POST http://localhost:3000/bank-accounts/{{bank_account_id}}/transactions
+Content-Type: application/json
+
+{
+  "pix_key_key": "user@email.com",
+  "pix_key_kind": "email",
+  "description": "My transaction",
+  "amount": 10.00
+}

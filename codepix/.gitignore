@@ -1,1 +1,6 @@
 .pgdata
+.idea
+.env
+.vscode
+!.vscode/settings.json
+.history/
